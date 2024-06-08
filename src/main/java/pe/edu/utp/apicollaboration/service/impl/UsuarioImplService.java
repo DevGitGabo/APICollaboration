@@ -8,12 +8,15 @@ import pe.edu.utp.apicollaboration.model.dto.perfil.ActualizarPerfilDto;
 import pe.edu.utp.apicollaboration.model.dto.perfil.PerfilDto;
 import pe.edu.utp.apicollaboration.model.entity.Usuario;
 import pe.edu.utp.apicollaboration.service.IAutenticacionService;
-import pe.edu.utp.apicollaboration.service.IUsuarioService;
+import pe.edu.utp.apicollaboration.service.IUsuario;
+
 
 import java.util.List;
 
 @Service
-public class UsuarioImplService implements IUsuarioService, IAutenticacionService {
+
+public class UsuarioImplService implements IUsuario, IAutenticacionService {
+
 
     @Autowired
     private UsuarioDao usuarioDao;
@@ -21,6 +24,11 @@ public class UsuarioImplService implements IUsuarioService, IAutenticacionServic
     @Override
     public List<Usuario> listAll() {
         return (List) usuarioDao.findAll();
+    }
+
+    @Override
+    public List<Usuario> listarUsuariosMismosCursos(Long idUsuario) {
+        return usuarioDao.findUsuariosInSameCourses(idUsuario);
     }
 
     @Override

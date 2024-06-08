@@ -10,13 +10,15 @@ import pe.edu.utp.apicollaboration.model.entity.Publicacion;
 public record PublicacionesDto(
         String texto,
         Long nroInteracciones,
-        String linkImagen
+        String linkImagen,
+        String nombrePublicador
 ) {
     public PublicacionesDto (Publicacion publicacion) {
         this(
                 publicacion.getTextoPublicacion(),
                 publicacion.getInteracciones(),
-                publicacion.getImagenPublicacion()
+                publicacion.getImagenPublicacion(),
+                publicacion.getUsuario().getNombre() + " " + publicacion.getUsuario().getApellido()
         );
     }
 }

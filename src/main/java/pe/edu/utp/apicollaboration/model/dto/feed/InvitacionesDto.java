@@ -7,5 +7,6 @@ import lombok.Builder;
 public record InvitacionesDto(
         Long idInvitacion,
         String texto,
-        String nombreCurso
+        String nombreCurso,
+        boolean estado_miembro
 ) {}

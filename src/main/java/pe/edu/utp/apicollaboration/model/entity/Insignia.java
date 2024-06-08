@@ -1,10 +1,7 @@
 package pe.edu.utp.apicollaboration.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class Insignia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

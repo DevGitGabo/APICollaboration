@@ -1,10 +1,7 @@
 package pe.edu.utp.apicollaboration.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Table(name = "miembro_grupo")
@@ -12,6 +9,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class MiembroGrupo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

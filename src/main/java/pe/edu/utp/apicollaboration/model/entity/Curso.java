@@ -1,0 +1,37 @@
+package pe.edu.utp.collaborate.model.entity;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.ToString;
+
+import java.util.List;
+
+@Entity
+@Table(name = "curso")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class Curso {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idCurso;
+
+    @Column(nullable = false)
+    private String codigoCurso;
+
+    @Column(nullable = false)
+    private String nombreCurso;
+
+    private String horario;
+
+    private String imagenCurso;
+
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DetalleCurso> detalleCursos;
+
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Grupo> grupos;
+}

@@ -1,11 +1,6 @@
 package pe.edu.utp.apicollaboration.model.entity;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,9 +19,11 @@ public class Seguidores {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_seguidor", insertable = false, updatable = false)
+    @MapsId("idSeguidor")
     private Usuario seguidor;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_seguido", insertable = false, updatable = false)
+    @MapsId("idSeguido")
     private Usuario seguido;
 }

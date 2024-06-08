@@ -1,13 +1,15 @@
 package pe.edu.utp.apicollaboration.model.dto.perfil;
 
-import pe.edu.utp.apicollaboration.model.dto.feed.InvitacionesDto;
 import pe.edu.utp.apicollaboration.model.dto.feed.PublicacionesDto;
 import pe.edu.utp.apicollaboration.model.entity.Insignia;
 import pe.edu.utp.apicollaboration.model.entity.Usuario;
 
+import pe.edu.utp.apicollaboration.model.entity.Publicacion;
+
 import java.util.List;
 
 public record PerfilDto(
+
         String nombreApellido,
         String codigoUniversitario,
         Long nroPublicaciones,

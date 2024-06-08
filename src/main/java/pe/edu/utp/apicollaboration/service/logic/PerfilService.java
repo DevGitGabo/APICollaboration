@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.utp.apicollaboration.model.dto.perfil.PerfilDto;
 import pe.edu.utp.apicollaboration.model.entity.Usuario;
-import pe.edu.utp.apicollaboration.service.IUsuario;
+import pe.edu.utp.apicollaboration.service.implementacion.IUsuario;
 
 @Service
 public class PerfilService {

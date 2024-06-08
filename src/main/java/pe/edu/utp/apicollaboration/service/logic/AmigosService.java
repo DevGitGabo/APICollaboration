@@ -2,15 +2,12 @@ package pe.edu.utp.apicollaboration.service.logic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import pe.edu.utp.apicollaboration.model.dao.SeguidoresDao;
 import pe.edu.utp.apicollaboration.model.dao.UsuarioDao;
 import pe.edu.utp.apicollaboration.model.dto.amigos.UsuariosDto;
 import pe.edu.utp.apicollaboration.model.entity.*;
-import pe.edu.utp.apicollaboration.service.ICurso;
-import pe.edu.utp.apicollaboration.service.IDetalleCurso;
-import pe.edu.utp.apicollaboration.service.ISeguidores;
-import pe.edu.utp.apicollaboration.service.IUsuario;
+import pe.edu.utp.apicollaboration.service.implementacion.ISeguidores;
+import pe.edu.utp.apicollaboration.service.implementacion.IUsuario;
 
 import java.util.ArrayList;
 import java.util.List;

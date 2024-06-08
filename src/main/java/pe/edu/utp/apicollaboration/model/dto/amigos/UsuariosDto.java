@@ -6,9 +6,7 @@ import lombok.ToString;
 
 import java.util.List;
 
-@ToString
 @Builder
-@AllArgsConstructor
 public record UsuariosDto(
         String nombre,
         List<String> nombreEtiquetas,

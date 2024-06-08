@@ -8,7 +8,7 @@ import pe.edu.utp.apicollaboration.model.entity.Publicacion;
 import pe.edu.utp.apicollaboration.service.IPublicacion;
 
 @Service
-public class PublicacionImpl implements IPublicacion {
+public class PublicacionImplService implements IPublicacion {
 
     @Autowired
     private PublicacionDao publicacionDao;

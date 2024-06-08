@@ -8,7 +8,7 @@ import pe.edu.utp.apicollaboration.model.entity.DetalleCurso;
 import pe.edu.utp.apicollaboration.service.IDetalleCurso;
 
 @Service
-public class DetalleCursoImpl implements IDetalleCurso {
+public class DetalleCursoImplService implements IDetalleCurso {
 
     @Autowired
     private DetalleCursoDao detalleCursoDao;

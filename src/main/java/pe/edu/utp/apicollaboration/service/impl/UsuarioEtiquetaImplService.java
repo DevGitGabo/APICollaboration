@@ -9,7 +9,7 @@ import pe.edu.utp.apicollaboration.model.entity.UsuarioEtiquetaId;
 import pe.edu.utp.apicollaboration.service.IUsuarioEtiqueta;
 
 @Service
-public class UsuarioEtiquetaImpl implements IUsuarioEtiqueta {
+public class UsuarioEtiquetaImplService implements IUsuarioEtiqueta {
 
     @Autowired
     private UsuarioEtiquetaDao usuarioEtiquetaDao;

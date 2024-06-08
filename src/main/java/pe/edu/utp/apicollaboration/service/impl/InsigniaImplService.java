@@ -8,7 +8,7 @@ import pe.edu.utp.apicollaboration.model.entity.Insignia;
 import pe.edu.utp.apicollaboration.service.IInsignia;
 
 @Service
-public class InsigniaImpl implements IInsignia {
+public class InsigniaImplService implements IInsignia {
 
     @Autowired
     private InsigniaDao insigniaDao;

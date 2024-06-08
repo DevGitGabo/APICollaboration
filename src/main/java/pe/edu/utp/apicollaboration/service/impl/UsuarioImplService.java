@@ -5,13 +5,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pe.edu.utp.apicollaboration.model.dao.UsuarioDao;
 import pe.edu.utp.apicollaboration.model.entity.Usuario;
-import pe.edu.utp.apicollaboration.service.IUsuario;
+import pe.edu.utp.apicollaboration.service.IUsuarioService;
+
+import java.util.List;
 
 @Service
-public class UsuarioImpl implements IUsuario {
+public class UsuarioImplService implements IUsuarioService {
 
     @Autowired
     private UsuarioDao usuarioDao;
+
+    @Override
+    public List<Usuario> listAll() {
+        return (List) usuarioDao.findAll();
+    }
 
     @Override
     @Transactional

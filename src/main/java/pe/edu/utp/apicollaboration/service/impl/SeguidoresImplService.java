@@ -9,7 +9,7 @@ import pe.edu.utp.apicollaboration.model.entity.SeguidoresId;
 import pe.edu.utp.apicollaboration.service.ISeguidores;
 
 @Service
-public class SeguidoresImpl implements ISeguidores {
+public class SeguidoresImplService implements ISeguidores {
 
     @Autowired
     private SeguidoresDao seguidoresDao;

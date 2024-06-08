@@ -1,4 +1,4 @@
-package pe.edu.utp.apicollaboration.controller;
+package pe.edu.utp.apicollaboration.controller.base;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

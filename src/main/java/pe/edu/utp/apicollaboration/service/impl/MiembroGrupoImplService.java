@@ -8,7 +8,7 @@ import pe.edu.utp.apicollaboration.model.entity.MiembroGrupo;
 import pe.edu.utp.apicollaboration.service.IMiembroGrupo;
 
 @Service
-public class MiembroGrupoImpl implements IMiembroGrupo {
+public class MiembroGrupoImplService implements IMiembroGrupo {
 
     @Autowired
     private MiembroGrupoDao miembroGrupoDao;

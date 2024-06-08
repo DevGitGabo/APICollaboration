@@ -1,4 +1,4 @@
-package pe.edu.utp.apicollaboration.controller;
+package pe.edu.utp.apicollaboration.controller.base;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -7,9 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.utp.apicollaboration.model.entity.Usuario;
 import pe.edu.utp.apicollaboration.model.payload.MensajeResponse;
-import pe.edu.utp.apicollaboration.service.IUsuario;
+import pe.edu.utp.apicollaboration.service.IUsuarioService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -17,7 +18,7 @@ import java.util.Map;
 public class UsuarioController {
 
     @Autowired
-    private IUsuario usuarioService;
+    private IUsuarioService usuarioService;
 
     @PostMapping("/usuario")
     @ResponseStatus(HttpStatus.CREATED)
@@ -50,5 +51,16 @@ public class UsuarioController {
     @ResponseStatus(HttpStatus.OK)
     public Usuario showById(@PathVariable Long id) {
         return usuarioService.findById(id);
+    }
+    @GetMapping("/usuarios")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> showAll() {
+        List<Usuario> usuarios = usuarioService.listAll();
+        return new ResponseEntity<>(
+                MensajeResponse.builder()
+                        .mensaje("")
+                        .object(usuarios)
+                        .build(),
+                HttpStatus.OK);
     }
 }

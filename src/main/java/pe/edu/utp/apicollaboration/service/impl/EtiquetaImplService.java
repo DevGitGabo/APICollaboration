@@ -8,7 +8,7 @@ import pe.edu.utp.apicollaboration.model.entity.Etiqueta;
 import pe.edu.utp.apicollaboration.service.IEtiqueta;
 
 @Service
-public class EtiquetaImpl implements IEtiqueta {
+public class EtiquetaImplService implements IEtiqueta {
 
     @Autowired
     private EtiquetaDao etiquetaDao;

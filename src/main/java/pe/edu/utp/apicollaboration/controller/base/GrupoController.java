@@ -13,17 +13,17 @@ public class GrupoController {
     @Autowired
     private IGrupo grupoService;
 
-    @PostMapping("/grupo")
+    /*@PostMapping("/grupo")
     @ResponseStatus(HttpStatus.CREATED)
     public Grupo create(@RequestBody Grupo grupo) {
         return grupoService.save(grupo);
-    }
+    }*/
 
-    @PutMapping("/grupo")
+    /*@PutMapping("/grupo")
     @ResponseStatus(HttpStatus.CREATED)
     public Grupo update(@RequestBody Grupo grupo) {
         return grupoService.save(grupo);
-    }
+    }*/
 
     @DeleteMapping("/grupo/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

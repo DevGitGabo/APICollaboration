@@ -4,13 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pe.edu.utp.apicollaboration.model.dao.UsuarioDao;
+import pe.edu.utp.apicollaboration.model.dto.perfil.ActualizarPerfilDto;
+import pe.edu.utp.apicollaboration.model.dto.perfil.PerfilDto;
 import pe.edu.utp.apicollaboration.model.entity.Usuario;
+import pe.edu.utp.apicollaboration.service.IAutenticacionService;
 import pe.edu.utp.apicollaboration.service.IUsuarioService;
 
 import java.util.List;
 
 @Service
-public class UsuarioImplService implements IUsuarioService {
+public class UsuarioImplService implements IUsuarioService, IAutenticacionService {
 
     @Autowired
     private UsuarioDao usuarioDao;
@@ -36,5 +39,26 @@ public class UsuarioImplService implements IUsuarioService {
     @Transactional
     public void delete(Usuario usuario) {
         usuarioDao.delete(usuario);
+    }
+
+    @Override
+    public PerfilDto getPerfilUserById(Long id) {
+        return null;
+    }
+
+    @Override
+    @Transactional
+    public void updateDescriptionPerfil(ActualizarPerfilDto ActualizarPerfilDTO) {
+        Usuario user = findById(ActualizarPerfilDTO.id());
+        user.setDescripcion(ActualizarPerfilDTO.descripcion());
+        usuarioDao.save(user);
+    }
+
+    @Override
+    public boolean autenticar(String usuario, String password) {
+        Usuario user = usuarioDao.findByCodigoUniversitario(usuario)
+                .orElseThrow(() -> new IllegalArgumentException(("No se encontro el usuario")));
+        return (user.getContrasena().equals(password.toLowerCase()) && user.getCodigoUniversitario().equals(usuario));
+
     }
 }

@@ -5,4 +5,7 @@ import lombok.ToString;
 
 
 @Builder
-public record LoginDto(String usuario, String password) { }
+public record LoginDto(
+        String codigo_universitario,
+        String contrasena)
+{ }

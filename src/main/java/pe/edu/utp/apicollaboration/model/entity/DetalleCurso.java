@@ -1,4 +1,4 @@
-package pe.edu.utp.collaborate.model.entity;
+package pe.edu.utp.apicollaboration.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

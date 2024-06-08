@@ -1,5 +1,6 @@
 package pe.edu.utp.apicollaboration.controller.collaborate;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,9 @@ import pe.edu.utp.apicollaboration.model.dto.feed.FeedDto;
 import pe.edu.utp.apicollaboration.model.dto.feed.InvitacionesDto;
 import pe.edu.utp.apicollaboration.model.dto.feed.PublicacionesDto;
 import pe.edu.utp.apicollaboration.model.dto.feed.PublicarDto;
+import pe.edu.utp.apicollaboration.model.entity.Publicacion;
 import pe.edu.utp.apicollaboration.model.payload.MensajeResponse;
+import pe.edu.utp.apicollaboration.service.logic.FeedService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +21,17 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class FeedControlador {
 
+    @Autowired
+    private FeedService feedService;
+
     @GetMapping("/feed/{idUsuario}")
     public ResponseEntity<?> getFeed(@PathVariable Long idUsuario) {
 
-        List<InvitacionesDto> invitaciones = new ArrayList<InvitacionesDto>();
-        List<PublicacionesDto> publicaciones = new ArrayList<PublicacionesDto>();
-        FeedDto feed = new FeedDto(invitaciones, publicaciones);
-
         try {
-            // Colocar la lógica
+            List<InvitacionesDto> invitaciones = feedService.listaInvitaciones(idUsuario);
+            List<PublicacionesDto> publicaciones = feedService.listarPublicaciones(idUsuario);
+            FeedDto feed = new FeedDto(invitaciones, publicaciones);
+
             return new ResponseEntity<>(feed, HttpStatus.OK);
         }catch (DataAccessException exDt) {
 
@@ -41,7 +46,7 @@ public class FeedControlador {
     public ResponseEntity<?> publicar(@RequestBody PublicarDto publicar) {
 
         try {
-            // Colocar la lógica
+            feedService.guardarPublicacion(publicar);
             return new ResponseEntity<>("", HttpStatus.CREATED);
         }catch (DataAccessException exDt) {
 
@@ -56,7 +61,7 @@ public class FeedControlador {
     public ResponseEntity<?> responderInvitacion(@RequestBody InvitacionesDto invitaciones) {
 
         try {
-            // Colocar la lógica
+            feedService.actualizarInvitaciones(invitaciones);
             return new ResponseEntity<>("", HttpStatus.CREATED);
         }catch (DataAccessException exDt) {
 

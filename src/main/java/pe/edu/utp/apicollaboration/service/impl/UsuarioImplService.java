@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pe.edu.utp.apicollaboration.model.dao.UsuarioDao;
 import pe.edu.utp.apicollaboration.model.entity.Usuario;
-import pe.edu.utp.apicollaboration.service.IUsuarioService;
+import pe.edu.utp.apicollaboration.service.IUsuario;
 
 import java.util.List;
 
 @Service
-public class UsuarioImplService implements IUsuarioService {
+public class UsuarioImplService implements IUsuario {
 
     @Autowired
     private UsuarioDao usuarioDao;
@@ -18,6 +18,11 @@ public class UsuarioImplService implements IUsuarioService {
     @Override
     public List<Usuario> listAll() {
         return (List) usuarioDao.findAll();
+    }
+
+    @Override
+    public List<Usuario> listarUsuariosMismosCursos(Long idUsuario) {
+        return usuarioDao.findUsuariosInSameCourses(idUsuario);
     }
 
     @Override

@@ -2,6 +2,7 @@ package pe.edu.utp.apicollaboration.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pe.edu.utp.apicollaboration.model.dto.feed.PublicarDto;
 
 @Entity
 @Table(name = "publicacion")
@@ -25,4 +26,12 @@ public class Publicacion {
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
+
+    public Publicacion(PublicarDto publicarDto, Usuario usuario) {
+        this.idPublicacion = 1L;
+        this.textoPublicacion = publicarDto.texto();
+        this.imagenPublicacion = null;
+        this.interacciones = 0L;
+        this.usuario = usuario;
+    }
 }

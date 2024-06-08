@@ -7,18 +7,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.utp.apicollaboration.model.entity.Usuario;
 import pe.edu.utp.apicollaboration.model.payload.MensajeResponse;
-import pe.edu.utp.apicollaboration.service.IUsuarioService;
+import pe.edu.utp.apicollaboration.service.IUsuario;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1")
 public class UsuarioController {
 
     @Autowired
-    private IUsuarioService usuarioService;
+    private IUsuario usuarioService;
 
     @PostMapping("/usuario")
     @ResponseStatus(HttpStatus.CREATED)

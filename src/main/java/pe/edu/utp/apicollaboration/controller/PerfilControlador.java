@@ -36,11 +36,6 @@ public class PerfilControlador {
                     build(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/perfil/{id}")
-    public ResponseEntity<PerfilDto> getPerfilUserById(@PathVariable Long id){
-        PerfilDto dtoPerfil = usuarioImplService.getPerfilUserById(id);
-        return ResponseEntity.ok(dtoPerfil);
-    }
 
     @PutMapping("/perfil/acercaDe")
     public ResponseEntity<?> updatePerfil(@RequestBody ActualizarPerfilDto ActualizarPerfilDTO){

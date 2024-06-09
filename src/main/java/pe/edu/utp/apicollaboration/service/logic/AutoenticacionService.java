@@ -16,13 +16,15 @@ public class AutoenticacionService {
     private IAutenticacionService autenticacionServicio;
 
     public boolean isAutenticacion(LoginDto loginDto) {
-        return autenticacionServicio.autenticar(loginDto.codigo_universitario(), loginDto.contrasena());
+            return autenticacionServicio.autenticar(loginDto.codigo_universitario(), loginDto.contrasena());
     }
+
 
     public Long usuario(LoginDto loginDto) {
-        Usuario user = usuarioDao.findByCodigoUniversitario(loginDto.codigo_universitario())
-                .orElseThrow(() -> new IllegalArgumentException(("No se encontro el usuario")));
+            Usuario user = usuarioDao.findByCodigoUniversitario(loginDto.codigo_universitario())
+                    .orElseThrow(() -> new IllegalArgumentException(("No se encontro el usuario")));
 
-        return user.getIdUser();
+            return user.getIdUser();
     }
+
 }

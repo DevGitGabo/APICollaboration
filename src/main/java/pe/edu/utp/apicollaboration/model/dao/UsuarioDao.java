@@ -15,20 +15,16 @@ import java.util.Optional;
 public interface UsuarioDao extends JpaRepository<Usuario, Long> {
     Optional<Usuario> findByCodigoUniversitario(String codigoUniversitario);
 
-    @Query("UPDATE Usuario u SET u.descripcion = :descripcion WHERE u.idUser = :idUser")
-    Usuario updateDescriptionForUserById(Long idUser, String descripcion);
+    @Query("SELECT u FROM Usuario u JOIN u.detalleCursos dc WHERE dc.curso.idCurso " +
+            "IN (SELECT dc2.curso.idCurso FROM DetalleCurso dc2 WHERE dc2.usuario.idUser = :idUsuario) " +
+            "AND u.idUser != :idUsuario")
+    List<Usuario> findUsuariosInSameCourses(@Param("idUsuario") Long idUsuario);
+
 
     @Query(value = """
             SELECT u.* FROM usuario u
-            JOIN detalle_curso dc ON u.id_user = dc.id_usuario
-            WHERE dc.id_curso IN (SELECT dc2.id_curso FROM detalle_curso dc2
-            WHERE dc2.id_usuario = ?1 ) AND u.id_user != ?1
-            """, nativeQuery = true)
-    List<Usuario> findUsuariosInSameCourses(Long idUsuario);
-
-    @Query(value = """
-            SELECT u.* FROM usuario u
-            WHERE (LOWER(u.nombre) LIKE LOWER(CONCAT('%', :texto, '%')) OR LOWER(u.apellido) LIKE LOWER(CONCAT('%', :texto, '%')))
+            WHERE (LOWER(u.nombre) LIKE LOWER(CONCAT('%', :texto, '%')) 
+            OR LOWER(u.apellido) LIKE LOWER(CONCAT('%', :texto, '%')))
             AND u.id_user != :idUsuario
             """, nativeQuery = true)
     List<Usuario> findUsuariosByNombreOrApellido(

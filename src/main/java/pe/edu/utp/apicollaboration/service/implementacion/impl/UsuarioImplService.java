@@ -1,17 +1,21 @@
 package pe.edu.utp.apicollaboration.service.implementacion.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pe.edu.utp.apicollaboration.model.dao.UsuarioDao;
 import pe.edu.utp.apicollaboration.model.dto.perfil.ActualizarPerfilDto;
 import pe.edu.utp.apicollaboration.model.dto.perfil.PerfilDto;
 import pe.edu.utp.apicollaboration.model.entity.Usuario;
+import pe.edu.utp.apicollaboration.service.Encrypt.Encryption;
 import pe.edu.utp.apicollaboration.service.implementacion.IAutenticacionService;
 import pe.edu.utp.apicollaboration.service.implementacion.IUsuario;
 
 
+import javax.crypto.spec.OAEPParameterSpec;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 
@@ -64,9 +68,15 @@ public class UsuarioImplService implements IUsuario, IAutenticacionService {
 
     @Override
     public boolean autenticar(String usuario, String password) {
-        Usuario user = usuarioDao.findByCodigoUniversitario(usuario)
-                .orElseThrow(() -> new IllegalArgumentException(("No se encontro el usuario")));
-        return (user.getContrasena().equals(password.toLowerCase()) && user.getCodigoUniversitario().equals(usuario));
+        Optional<Usuario> userOptional = usuarioDao.findByCodigoUniversitario(usuario);
 
+        if (userOptional.isEmpty()) {
+            return false;
+        }
+
+        Usuario user = userOptional.get();
+        String hashedPasswordFromDatabase = user.getContrasena();
+
+        return BCrypt.checkpw(password, hashedPasswordFromDatabase);
     }
 }

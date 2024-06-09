@@ -56,7 +56,7 @@ public class AmigosControlador {
 
         try {
             amigosService.seguir(idSeguido, idSeguidor);
-            return new ResponseEntity<>("", HttpStatus.CREATED);
+            return new ResponseEntity<>("Se realizó el seguimiento al usuario", HttpStatus.CREATED);
         }catch (DataAccessException exDt) {
 
             return new ResponseEntity<>(MensajeResponse.builder().
@@ -71,7 +71,7 @@ public class AmigosControlador {
 
         try {
             amigosService.dejarDeSeguir(idSeguido, idSeguidor);
-            return new ResponseEntity<>("", HttpStatus.CREATED);
+            return new ResponseEntity<>("Se dejo de seguir al usuario "+idSeguidor, HttpStatus.CREATED);
         }catch (DataAccessException exDt) {
 
             return new ResponseEntity<>(MensajeResponse.builder().

@@ -21,13 +21,15 @@ public interface MiembroGrupoDao extends JpaRepository<MiembroGrupo, Long> {
     JOIN MiembroGrupo mg ON u.idUser = mg.usuario.idUser
     WHERE mg.grupo.idGrupo = :idGrupo
     """)
-    List<MiembroGrupoDto> miembrosGrupo(Long idGrupo);
+    List<MiembroGrupoDto> miembrosGrupo(@Param("idGrupo") Long idGrupo);
+
 
     @Query(value = """
-            SELECT mg FROM MiembroGrupo mg 
-            WHERE mg.usuario.idUser = :idUsuario 
-            AND mg.estadoMiembro = 'INVITADO'
-            """)
+        SELECT mg FROM MiembroGrupo mg 
+        WHERE mg.usuario.idUser = :idUsuario 
+        AND mg.estadoMiembro = 'INVITADO'
+        """)
     List<MiembroGrupo> findByUsuarioAndEstadoInvitado(@Param("idUsuario") Long idUsuario);
+
 }
 

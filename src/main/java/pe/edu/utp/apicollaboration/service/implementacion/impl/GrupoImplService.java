@@ -32,20 +32,34 @@ public class GrupoImplService implements IGrupo {
     @Override
     @Transactional
     public void save(NuevoGrupoDto nuevoGrupoDto, List<Long> idUsers) {
-        Grupo grupoNuevo = new Grupo();
+        // Validar que se hayan proporcionado datos y que la lista de usuarios no esté vacía
+        if (nuevoGrupoDto == null || idUsers == null || idUsers.isEmpty()) {
+            throw new IllegalArgumentException("Datos insuficientes para crear el grupo.");
+        }
 
-        Optional<Curso> cursoOptional = cursoDao.findCursoById_curso(nuevoGrupoDto.idCurso());
-        grupoNuevo.setCurso(cursoOptional.get());
+        // Obtener el curso
+        Curso curso = cursoDao.findCursoById_curso(nuevoGrupoDto.idCurso())
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Curso no encontrado para el ID: "
+                        + nuevoGrupoDto.idCurso()));
+
+        // Crear el grupo
+        Grupo grupoNuevo = new Grupo();
+        grupoNuevo.setCurso(curso);
         grupoNuevo.setNombreGrupo(nuevoGrupoDto.nombre());
         grupoNuevo.setDescripcion(nuevoGrupoDto.descripcion());
         grupoNuevo.setNombreTarea(nuevoGrupoDto.nombreTarea());
 
         grupoDao.save(grupoNuevo);
 
-        for(Long iduser: idUsers){
-            Usuario usuario = usuarioDao.findById(iduser)
-                    .orElseThrow(()->new IllegalArgumentException("Usuario no se puede agregar porque no existe"));
+        // Asignar usuarios al grupo
+        for (Long idUser : idUsers) {
+            // Verificar si el usuario existe
+            Usuario usuario = usuarioDao.findById(idUser)
+                    .orElseThrow(() ->
+                            new IllegalArgumentException("Usuario no encontrado para el ID: " + idUser));
 
+            // Crear y guardar el miembro del grupo
             MiembroGrupo miembroGrupo = new MiembroGrupo();
             miembroGrupo.setUsuario(usuario);
             miembroGrupo.setGrupo(grupoNuevo);
@@ -55,6 +69,7 @@ public class GrupoImplService implements IGrupo {
             miembroGrupoDao.save(miembroGrupo);
         }
     }
+
 
     @Override
     @Transactional(readOnly = true)

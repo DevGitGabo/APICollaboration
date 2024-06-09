@@ -20,8 +20,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://webaplicationutpcollaborate-production.up.railway.app",
-                               "http://localhost:5173") // https://webaplicationutpcollaborate-production.up.railway.app
+                .allowedOrigins("https://webaplicationutpcollaborate-production.up.railway.app") // https://webaplicationutpcollaborate-production.up.railway.app
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(true)
@@ -31,23 +30,14 @@ public class CorsConfig implements WebMvcConfigurer {
     @Bean
     public OncePerRequestFilter corsFilter() {
         return new OncePerRequestFilter() {
-            private final List<String> allowedOrigins = Arrays.asList(
-                "https://webaplicationutpcollaborate-production.up.railway.app",
-                "https://otro-origen-que-permitir.com"
-            );
-    
             @Override
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
                     throws ServletException, IOException {
-                String origin = request.getHeader("Origin");
-                if (allowedOrigins.contains(origin)) {
-                    response.setHeader("Access-Control-Allow-Origin", origin);
+                if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+                    response.setHeader("Access-Control-Allow-Origin", "https://webaplicationutpcollaborate-production.up.railway.app"); //http://localhost:5173
                     response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
                     response.setHeader("Access-Control-Allow-Headers", "*");
                     response.setHeader("Access-Control-Allow-Credentials", "true");
-                }
-    
-                if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
                     response.setStatus(HttpServletResponse.SC_OK);
                 } else {
                     filterChain.doFilter(request, response);

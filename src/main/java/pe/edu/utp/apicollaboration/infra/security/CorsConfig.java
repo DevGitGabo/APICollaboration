@@ -20,7 +20,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5173") // Permitir solicitudes desde este origen
+                .allowedOrigins("https://webaplicationutpcollaborate-production.up.railway.app") // Permitir solicitudes desde este origen
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(true)
@@ -34,7 +34,7 @@ public class CorsConfig implements WebMvcConfigurer {
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
                     throws ServletException, IOException {
                 if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
-                    response.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+                    response.setHeader("Access-Control-Allow-Origin", "https://webaplicationutpcollaborate-production.up.railway.app");
                     response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
                     response.setHeader("Access-Control-Allow-Headers", "*");
                     response.setHeader("Access-Control-Allow-Credentials", "true");

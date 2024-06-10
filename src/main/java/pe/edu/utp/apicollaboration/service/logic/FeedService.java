@@ -55,10 +55,13 @@ public class FeedService {
         MiembroGrupo miembroGrupo = miembroGrupoRepository.findById(invitaciones.idInvitacion()).orElse(null);
 
         assert miembroGrupo != null;
-        if (invitaciones.estado_miembro().equals("INVITADO")){
+
+        if (invitaciones.estado_miembro().equals("ACEPTADO")){
             miembroGrupo.setEstadoMiembro("ACEPTADO");
             miembroGrupoRepository.save(miembroGrupo);
-        }else{
+        }
+
+        if (invitaciones.estado_miembro().equals("RECHAZADO")){
             miembroGrupoRepository.delete(miembroGrupo);
         }
 
